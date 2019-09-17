@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<?php
+include('../Common/session.php');
+?>
 
 <head>
     <meta charset="UTF-8">
@@ -9,8 +12,11 @@
 </head>
 
 <body>
-    <h1>day la user</h1>
-    <a href='../Login-Logout/Logout.php'>Logout</a>
+    <div style="text-align: center;">
+        <h3> Welcome, <?php echo  $login_session; ?></h3>
+        <a href='../Login-Logout/Logout.php'>Logout</a>
+    </div>
+
 </body>
 
 </html>
