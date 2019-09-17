@@ -45,13 +45,28 @@
             if (!preg_match("/^([a-zA-Z0-9' ]+)$/", $username)) {
                 $usernameErr = "Tên tài khoản không hợp lệ";
                 $CheckErr = 1;
+            } else {
+                require('../Common/test_connection.php');
+                $sql = "select * from users where user_username = '" . $username . "';";
+                $result = mysqli_query($conn, $sql);
+                if (mysqli_num_rows($result) > 0) {
+                    $usernameErr = "Tên tài khoản đã tồn tại";
+                    $CheckErr = 1;
+                }
             }
         }
         if (empty($_POST["email"])) {
             $emailErr = "Không được bỏ trống";
             $CheckErr = 1;
         } else {
+            require('../Common/test_connection.php');
             $email = check_input($_POST["email"]);
+            $sql = "select * from users where user_email = '" . $email . "';";
+            $result = mysqli_query($conn, $sql);
+            if (mysqli_num_rows($result) > 0) {
+                $emailErr = "Email đã tồn tại";
+                $CheckErr = 1;
+            }
         }
         if (empty($_POST["password"]) || empty($_POST["re-password"])) {
             $passwordErr = "Password không giống nhau";
